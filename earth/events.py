@@ -1,8 +1,8 @@
 import typing
 import attr
 
-from adventurers import Busy
-from year import Months
+from .adventurers import Busy
+from .year import Months
 
 
 class MissingAttendee(RuntimeError):

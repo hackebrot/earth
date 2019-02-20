@@ -3,8 +3,8 @@ import typing
 
 import attr
 
-from year import Months
-from travel import fly, AirportProblem
+from .year import Months
+from .travel import fly, AirportProblem
 
 
 class Busy(RuntimeError):
