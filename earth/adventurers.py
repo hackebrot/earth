@@ -75,7 +75,7 @@ def new_panda(name, **kwargs):
     def eat(panda):
         for i in range(4):
             print(f"{panda.profile} {panda.name} is eating... 🌱")
-            time.sleep(10)
+            time.sleep(5)
 
     kwargs.setdefault("location", "Asia")
     return Adventurer(
