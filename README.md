@@ -1,6 +1,15 @@
 # earth
 
-Example Python project for my PyBerlin talk 🌍
+Example Python project for my talk: Customizing your [pytest][pytest] test
+suite 🌍
+
+[pytest]: https://github.com/pytest-dev/pytest
+
+## Requirements
+
+The **earth** library requires Python 3.7 and [attrs][attrs] >= 18.2.
+
+[attrs]: https://pypi.org/project/attrs/
 
 ## Example Usage
 
