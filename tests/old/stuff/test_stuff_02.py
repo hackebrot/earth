@@ -1,7 +1,12 @@
+import time
 import unittest
 
 
 class TestStringMethods(unittest.TestCase):
+    def setUp(self):
+        # A long time ago in a galaxy far, far away...
+        time.sleep(2)
+
     def test_upper(self):
         self.assertEqual("foo".upper(), "FOO")
 
