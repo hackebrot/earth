@@ -1,6 +1,10 @@
 import time
 import unittest
 
+import pytest
+
+pytest.skip("This does generate code coverage", allow_module_level=True)
+
 
 class TestStringMethods(unittest.TestCase):
     def setUp(self):
