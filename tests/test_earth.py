@@ -9,7 +9,7 @@ def event():
 
 
 @pytest.fixture
-def friends():
+def small_group():
     return [
         adventurers.new_frog("Bruno"),
         adventurers.new_lion("Michael"),
@@ -18,10 +18,41 @@ def friends():
     ]
 
 
+@pytest.fixture
+def large_group():
+    return [
+        adventurers.new_frog("Bruno"),
+        adventurers.new_panda("Po"),
+        adventurers.new_fox("Dave"),
+        adventurers.new_lion("Michael"),
+        adventurers.new_koala("Brianna"),
+        adventurers.new_tiger("Julia"),
+        adventurers.new_fox("Raphael"),
+        adventurers.new_fox("Caro"),
+        adventurers.new_bear("Chris"),
+        # Bears in warm climates don't hibernate 🐻
+        adventurers.new_bear("Danny", availability=[*Months]),
+        adventurers.new_bear("Audrey", availability=[*Months]),
+    ]
+
+
 @pytest.mark.wip
 @pytest.mark.happy
-def test_earth(event, friends):
-    for adventurer in friends:
+def test_small_group(event, small_group):
+    for adventurer in small_group:
+        event.invite(adventurer)
+
+    for attendee in event.attendees:
+        attendee.get_ready()
+        attendee.travel_to(event)
+
+    event.start()
+
+
+@pytest.mark.wip
+@pytest.mark.happy
+def test_large_group(event, large_group):
+    for adventurer in small_group:
         event.invite(adventurer)
 
     for attendee in event.attendees:
