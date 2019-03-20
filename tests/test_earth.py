@@ -3,13 +3,13 @@ import pytest
 from earth import adventurers, Event, Months
 
 
-@pytest.fixture
-def event():
+@pytest.fixture(name="event")
+def fixture_event():
     return Event("PyCon US", "North America", Months.MAY)
 
 
-@pytest.fixture
-def small_group():
+@pytest.fixture(name="small_group")
+def fixture_small_group():
     return [
         adventurers.new_frog("Bruno"),
         adventurers.new_lion("Michael"),
@@ -18,8 +18,8 @@ def small_group():
     ]
 
 
-@pytest.fixture
-def large_group():
+@pytest.fixture(name="large_group")
+def fixture_large_group():
     return [
         adventurers.new_frog("Bruno"),
         adventurers.new_panda("Po"),
