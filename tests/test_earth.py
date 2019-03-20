@@ -52,7 +52,7 @@ def test_small_group(event, small_group):
 @pytest.mark.wip
 @pytest.mark.happy
 def test_large_group(event, large_group):
-    for adventurer in small_group:
+    for adventurer in large_group:
         event.invite(adventurer)
 
     for attendee in event.attendees:
