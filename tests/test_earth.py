@@ -69,6 +69,7 @@ def test_small_group(event, small_group):
 @pytest.mark.wip
 @pytest.mark.slow
 @pytest.mark.happy
+@pytest.mark.xfail(reason="Problems with TXL airport")
 def test_large_group(event, large_group):
     for adventurer in large_group:
         event.invite(adventurer)
@@ -82,6 +83,7 @@ def test_large_group(event, large_group):
 
 @pytest.mark.wip
 @pytest.mark.happy
+@pytest.mark.xfail(reason="Problems with TXL airport")
 def test_no_pandas_group(event, no_pandas_group):
     for adventurer in no_pandas_group:
         event.invite(adventurer)
