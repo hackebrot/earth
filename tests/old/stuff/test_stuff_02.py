@@ -3,7 +3,7 @@ import unittest
 
 import pytest
 
-pytest.skip("This does generate code coverage", allow_module_level=True)
+pytest.skip("This does not generate code coverage", allow_module_level=True)
 
 
 class TestStringMethods(unittest.TestCase):
