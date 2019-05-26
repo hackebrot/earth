@@ -1,7 +1,7 @@
 # earth
 
-Example Python project for my talk: Customizing your [pytest][pytest] test
-suite 🌍
+Example Python project for my talk: [Customizing your pytest test
+suite][blogpost] 🌍
 
 [pytest]: https://github.com/pytest-dev/pytest
 
@@ -55,3 +55,5 @@ Conduct][code of conduct]. By participating in this project you agree to abide
 by its terms.
 
 [code of conduct]: https://github.com/hackebrot/earth/blob/master/.github/CODE_OF_CONDUCT.md
+[blogpost]: https://raphael.codes/blog/customizing-your-pytest-test-suite-part-1/
+
