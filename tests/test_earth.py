@@ -16,6 +16,11 @@ def fixture_event(request, variables):
     event_info = variables["events"][event_name]
     event_location = event_info["location"]
     event_month = map_to_month[event_info["month"]]
+
+    # Apply marker for conferences in Europe
+    if event_location == "Europe":
+        request.applymarker(pytest.mark.txl)
+
     return Event(event_name, event_location, event_month)
 
 
