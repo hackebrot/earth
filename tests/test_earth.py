@@ -56,48 +56,6 @@ def fixture_no_pandas_group():
     ]
 
 
-@pytest.mark.wip
-@pytest.mark.happy
-def test_small_group(event, small_group):
-    for adventurer in small_group:
-        event.invite(adventurer)
-
-    for attendee in event.attendees:
-        attendee.get_ready()
-        attendee.travel_to(event)
-
-    event.start()
-
-
-@pytest.mark.wip
-@pytest.mark.slow
-@pytest.mark.happy
-@pytest.mark.xfail(reason="Problems with TXL airport")
-def test_large_group(event, large_group):
-    for adventurer in large_group:
-        event.invite(adventurer)
-
-    for attendee in event.attendees:
-        attendee.get_ready()
-        attendee.travel_to(event)
-
-    event.start()
-
-
-@pytest.mark.wip
-@pytest.mark.happy
-@pytest.mark.xfail(reason="Problems with TXL airport")
-def test_no_pandas_group(event, no_pandas_group):
-    for adventurer in no_pandas_group:
-        event.invite(adventurer)
-
-    for attendee in event.attendees:
-        attendee.get_ready()
-        attendee.travel_to(event)
-
-    event.start()
-
-
 @pytest.fixture(name="group")
 def fixture_group(request, small_group, large_group, no_pandas_group):
     group_name = request.param
