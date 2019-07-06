@@ -3,6 +3,9 @@ import pytest
 from earth import adventurers, Event, Months
 
 
+pytest.mark.txl = pytest.mark.xfail(reason="Problems with TXL airport")
+
+
 @pytest.fixture(name="event")
 def fixture_event():
     return Event("PyCon US", "North America", Months.MAY)
