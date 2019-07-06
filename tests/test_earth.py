@@ -96,3 +96,36 @@ def test_no_pandas_group(event, no_pandas_group):
         attendee.travel_to(event)
 
     event.start()
+
+
+@pytest.fixture(name="group")
+def fixture_group(request, small_group, large_group, no_pandas_group):
+    group_name = request.param
+    groups = {
+        "small_group": small_group,
+        "large_group": large_group,
+        "no_pandas_group": no_pandas_group,
+    }
+    return groups[group_name]
+
+
+@pytest.mark.wip
+@pytest.mark.happy
+@pytest.mark.parametrize(
+    "group",
+    [
+        pytest.param("small_group"),
+        pytest.param("large_group", marks=[pytest.mark.txl, pytest.mark.slow]),
+        pytest.param("no_pandas_group", marks=[pytest.mark.txl]),
+    ],
+    indirect=True,
+)
+def test_earth(group, event):
+    for adventurer in group:
+        event.invite(adventurer)
+
+    for attendee in event.attendees:
+        attendee.get_ready()
+        attendee.travel_to(event)
+
+    event.start()
