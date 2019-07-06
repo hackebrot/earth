@@ -44,10 +44,20 @@ class Turtle:
     def pytest_runtest_logreport(self, report):
         self.durations[report.nodeid][report.when] = report.duration
 
+    @pytest.mark.tryfirst
+    def pytest_collection_modifyitems(self, session, config, items):
+        for item in items:
+            duration = sum(self.durations[item.nodeid].values())
+            if duration > self.slow:
+                item.add_marker(pytest.mark.turtle)
+
     def pytest_sessionfinish(self, session):
         cached_durations = self.config.cache.get("cache/turtle", defaultdict(dict))
         cached_durations.update(self.durations)
         self.config.cache.set("cache/turtle", cached_durations)
+
+    def pytest_configure(self, config):
+        config.addinivalue_line("markers", "turtle: marker for slow running tests")
 
 
 def pytest_configure(config):
