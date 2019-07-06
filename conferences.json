@@ -1,0 +1,24 @@
+{
+  "events": {
+    "EuroPython": {
+      "location": "Europe",
+      "month": "JUL"
+    },
+    "PyCon US": {
+      "location": "North America",
+      "month": "MAY"
+    },
+    "PyCon AU": {
+      "location": "Australia",
+      "month": "AUG"
+    },
+    "PyCon Namibia": {
+      "location": "Africa",
+      "month": "FEB"
+    },
+    "Python Brasil": {
+      "location": "South America",
+      "month": "OCT"
+    }
+  }
+}
