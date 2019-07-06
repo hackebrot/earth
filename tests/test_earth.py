@@ -6,9 +6,17 @@ from earth import adventurers, Event, Months
 pytest.mark.txl = pytest.mark.xfail(reason="Problems with TXL airport")
 
 
-@pytest.fixture(name="event")
-def fixture_event():
-    return Event("PyCon US", "North America", Months.MAY)
+@pytest.fixture(
+    name="event",
+    params=["EuroPython", "PyCon AU", "PyCon Namibia", "PyCon US", "Python Brasil"],
+)
+def fixture_event(request, variables):
+    map_to_month = {month.name: month for month in Months}
+    event_name = request.param
+    event_info = variables["events"][event_name]
+    event_location = event_info["location"]
+    event_month = map_to_month[event_info["month"]]
+    return Event(event_name, event_location, event_month)
 
 
 @pytest.fixture(name="small_group")
