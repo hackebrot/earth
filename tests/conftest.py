@@ -12,6 +12,15 @@ def pytest_addoption(parser):
         help="Include slow tests in test run",
     )
 
+    group.addoption(
+        "--owl",
+        action="store",
+        type=str,
+        default=None,
+        metavar="fixture",
+        help="Run test using the fixture",
+    )
+
 
 def pytest_collection_modifyitems(items, config):
     """Deselect tests marked as slow if --slow is set."""
@@ -30,6 +39,29 @@ def pytest_collection_modifyitems(items, config):
 
     config.hook.pytest_deselected(items=deselected_items)
     items[:] = selected_items
+
+
+class Owl:
+    """Plugin for running tests using a specific fixture."""
+
+    def __init__(self, config):
+        self.config = config
+
+    def pytest_collection_modifyitems(self, items, config):
+        if not config.option.owl:
+            return
+
+        selected_items = []
+        deselected_items = []
+
+        for item in items:
+            if config.option.owl in getattr(item, "fixturenames", ()):
+                selected_items.append(item)
+            else:
+                deselected_items.append(item)
+
+        config.hook.pytest_deselected(items=deselected_items)
+        items[:] = selected_items
 
 
 class Turtle:
@@ -62,3 +94,4 @@ class Turtle:
 
 def pytest_configure(config):
     config.pluginmanager.register(Turtle(config), "turtle")
+    config.pluginmanager.register(Owl(config), "owl")
