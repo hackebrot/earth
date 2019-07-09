@@ -2,6 +2,8 @@ from collections import defaultdict
 
 import pytest
 
+from .github import create_issue
+
 
 def pytest_addoption(parser):
     group = parser.getgroup("earth")
@@ -39,6 +41,42 @@ def pytest_collection_modifyitems(items, config):
 
     config.hook.pytest_deselected(items=deselected_items)
     items[:] = selected_items
+
+
+class Elephant:
+    """Plugin for creating GitHub issues for test regressions."""
+
+    def __init__(self, config):
+        self.config = config
+        self.failed = {}
+
+    def pytest_runtest_logreport(self, report):
+        if report.failed:
+            self.failed[report.nodeid] = report
+
+    def pytest_terminal_summary(self, terminalreporter):
+        """Hook implementation that writes the URL to the generated GitHub
+        issue to the terminal summary.
+        """
+
+        if not self.failed:
+            return
+
+        md = self.config.pluginmanager.getplugin("md_plugin")
+
+        # TODO: Create GitHub issue here 🚧
+
+        data = create_issue(
+            "hackebrot",
+            "earth",
+            "Test regression detected by pytest-elephant 🐘",
+            md.report,
+            ["regression"],
+        )
+
+        issue = data["html_url"]
+
+        terminalreporter.write_sep("-", f"created GitHub issue: {issue}")
 
 
 class Owl:
@@ -95,3 +133,4 @@ class Turtle:
 def pytest_configure(config):
     config.pluginmanager.register(Turtle(config), "turtle")
     config.pluginmanager.register(Owl(config), "owl")
+    config.pluginmanager.register(Elephant(config), "elephant")
