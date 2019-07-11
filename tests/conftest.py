@@ -23,7 +23,7 @@ def pytest_collection_modifyitems(items, config):
     deselected_items = []
 
     for item in items:
-        if item.get_closest_marker("slow"):
+        if item.get_closest_marker("slow") or item.get_closest_marker("turtle"):
             deselected_items.append(item)
         else:
             selected_items.append(item)
