@@ -8,7 +8,14 @@ pytest.mark.txl = pytest.mark.xfail(reason="Problems with TXL airport")
 
 @pytest.fixture(
     name="event",
-    params=["EuroPython", "PyCon AU", "PyCon Namibia", "PyCon US", "Python Brasil"],
+    params=[
+        "EuroPython",
+        "PyCon AU",
+        "PyCon Namibia",
+        "PyCon US",
+        "Python Brasil",
+        "PyCon DE",
+    ],
 )
 def fixture_event(request, variables):
     map_to_month = {month.name: month for month in Months}
