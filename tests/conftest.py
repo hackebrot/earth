@@ -15,6 +15,13 @@ def pytest_addoption(parser):
     )
 
     group.addoption(
+        "--elephant",
+        action="store_true",
+        default=False,
+        help="Create GitHub issue for test regressions",
+    )
+
+    group.addoption(
         "--owl",
         action="store",
         type=str,
@@ -133,4 +140,6 @@ class Turtle:
 def pytest_configure(config):
     config.pluginmanager.register(Turtle(config), "turtle")
     config.pluginmanager.register(Owl(config), "owl")
-    config.pluginmanager.register(Elephant(config), "elephant")
+
+    if config.getoption("elephant"):
+        config.pluginmanager.register(Elephant(config), "elephant")
